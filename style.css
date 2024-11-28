@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  #editor, #preview {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  #editor {
+    border-right: 1px solid #ccc;
+  }
+  #preview {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  .CodeMirror {
+    height: 100%;
+  }
