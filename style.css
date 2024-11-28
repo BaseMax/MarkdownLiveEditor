@@ -10,7 +10,6 @@ body {
 }
 #editor, #preview {
     flex: 1;
-    padding: 10px;
     overflow-y: auto;
 }
 #editor {
