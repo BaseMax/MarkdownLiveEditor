@@ -18,6 +18,7 @@ body {
 #preview {
     padding: 20px;
     background-color: #f9f9f9;
+    text-align: start;
 }
 .CodeMirror {
     height: 100%;
