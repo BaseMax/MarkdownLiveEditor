@@ -3,16 +3,24 @@ const editor = CodeMirror(document.getElementById('editor'), {
     lineNumbers: true,
     theme: 'monokai',
     lineWrapping: true,
+    direction: 'rtl',
 });
 
 const preview = document.getElementById('preview');
 
-function updatePreview() {
-    const markdownContent = editor.getValue();
-    preview.innerHTML = marked.parse(markdownContent);
+function detectDirection(text) {
+    const rtlChars = /[\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]/;
+    return rtlChars.test(text) ? 'rtl' : 'ltr';
 }
 
-editor.on('change', updatePreview);
+function updatePreview() {
+    const markdownContent = editor.getValue();
+    const renderedHTML = marked.parse(markdownContent);
+
+    const direction = detectDirection(markdownContent);
+    preview.style.direction = direction;
+    preview.innerHTML = renderedHTML;
+}
 
 function syncScroll() {
     const editorScroll = editor.getScrollInfo();
@@ -21,6 +29,7 @@ function syncScroll() {
     preview.scrollTop = scrollRatio * previewScrollHeight;
 }
 
+editor.on('change', updatePreview);
 editor.on('scroll', syncScroll);
 
 editor.setValue('# Welcome to the Markdown Editor\n\nType your markdown on the left, and see the rendered result here!');
